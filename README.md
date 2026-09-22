@@ -17,12 +17,12 @@ AI integrations, accounting and public data.
 
 ## Open-source contributions
 
-### Open Library — Internet Archive
+### Open Library | Internet Archive
 
 Contributed to the migration of blocking lending and availability logic from Templetor templates into Python request handlers, improving separation of concerns and supporting the project's FastAPI migration.
 
-- [FastAPI: Move book lending preparation into Python — PR #13495](https://github.com/internetarchive/openlibrary/pull/13495)
-- [Hoist list availability lookups into Python handler — PR #13465](https://github.com/internetarchive/openlibrary/pull/13465)
+- [FastAPI: Move book lending preparation into Python | PR #13495](https://github.com/internetarchive/openlibrary/pull/13495)
+- [Hoist list availability lookups into Python handler | PR #13465](https://github.com/internetarchive/openlibrary/pull/13465)
 
 Both changes were validated by maintainers against the project's testing environment and incorporated into the upstream project.
 
@@ -30,15 +30,15 @@ Both changes were validated by maintainers against the project's testing environ
 
 Implemented a SerpApi Google Search integration for the Langroid agent framework, including mocked tests, environment-based configuration and integration coverage.
 
-- [Add SerpApi Google search tool — PR #1130](https://github.com/langroid/langroid/pull/1130)
+- [Add SerpApi Google search tool | PR #1130](https://github.com/langroid/langroid/pull/1130)
 
 The implementation was carried forward by the maintainer and merged in [PR #1133](https://github.com/langroid/langroid/pull/1133), with the original commit authorship preserved.
 
-### Querido Diário — Open Knowledge Brasil
+### Querido Diário | Open Knowledge Brasil
 
 Working on the Porto Alegre official gazette scraper, combining the historical PROCEMPA archive with the current DOPA API and expanding coverage back to 1995.
 
-- [Fix Porto Alegre gazette spider — PR #1469](https://github.com/okfn-brasil/querido-diario/pull/1469)
+- [Fix Porto Alegre gazette spider | PR #1469](https://github.com/okfn-brasil/querido-diario/pull/1469)
 
 The contribution includes defensive API parsing, historical data collection, automated regression tests and smoke testing against the live source.
 
