@@ -19,17 +19,24 @@ AI integrations, accounting and public data.
 
 ### [Gesttor Contábil](https://gesttorcontabil.com.br)
 
-A multi-tenant software platform for accounting firms, companies, MEIs and service providers, built around real accounting and tax operations in Brazil.
+A multi-tenant ERP and automation platform for accounting firms, designed around real Brazilian accounting and tax workflows.
 
-The public product currently focuses on removing repetitive work from NFS-e workflows. Accounting firms can manage a portfolio of CNPJs, issue service invoices individually or in batches, capture and organize XML files, manage digital certificates and deliver documents to clients by email or WhatsApp from a centralized workflow.
+Gesttor centralizes client portfolios, fiscal operations, NFS-e issuance, digital certificates, documents, tasks, financial workflows and AI-assisted operations in a single system. The product is being developed from production use cases rather than as a generic administrative dashboard.
 
-For companies and service providers, Gesttor provides a simpler path to issue NFS-e through the national standard, organize PDF and XML documents and automate delivery to customers without relying on municipal portals for each operation.
+From an engineering perspective, the platform is structured as a monorepo with a Django API, a dedicated web backoffice and an independent client portal. PostgreSQL provides the transactional core, while Celery and Redis handle asynchronous workloads and operational automation.
 
-The broader platform is designed as an operational system for accounting firms, bringing together client data, fiscal workflows, documents, tasks, financial operations, integrations and AI-assisted processes in a shared multi-tenant architecture.
+Key engineering areas include:
 
-Core technologies include Python, Django, PostgreSQL, Redis, Celery, Docker, React and the Model Context Protocol.
+- Multi-tenant data isolation and permission-aware modules
+- Brazilian NFS-e workflows, including the national service invoice standard
+- Background processing for operational and fiscal routines
+- Separate staff and client-facing applications sharing the same backend domain
+- Digital certificate, document and external service integrations
+- AI and Model Context Protocol integrations for assisted operations
+- CI checks for code quality, architectural boundaries and migration safety
+- Expanded automated testing for higher-risk fiscal code paths
 
-The product is currently in controlled rollout. The main source repository remains private because it contains proprietary business logic and active production integrations.
+The product is currently in controlled rollout at [gesttorcontabil.com.br](https://gesttorcontabil.com.br). The main source repository remains private because it contains proprietary business logic and active production integrations.
 
 ### [Querido Diário MCP Server](https://github.com/lucaspmgomess/querido-diario-mcp-server)
 
