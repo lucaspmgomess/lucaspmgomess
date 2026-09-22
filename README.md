@@ -15,34 +15,21 @@ AI integrations, accounting and public data.
 
 </div>
 
-## Open-source contributions
+## Selected work
 
-### Open Library | Internet Archive
+### [Gesttor Contábil](https://gesttorcontabil.com.br)
 
-Contributed to the migration of blocking lending and availability logic from Templetor templates into Python request handlers, improving separation of concerns and supporting the project's FastAPI migration.
+A multi-tenant software platform for accounting firms, companies, MEIs and service providers, built around real accounting and tax operations in Brazil.
 
-- [FastAPI: Move book lending preparation into Python | PR #13495](https://github.com/internetarchive/openlibrary/pull/13495)
-- [Hoist list availability lookups into Python handler | PR #13465](https://github.com/internetarchive/openlibrary/pull/13465)
+The public product currently focuses on removing repetitive work from NFS-e workflows. Accounting firms can manage a portfolio of CNPJs, issue service invoices individually or in batches, capture and organize XML files, manage digital certificates and deliver documents to clients by email or WhatsApp from a centralized workflow.
 
-Both changes were validated by maintainers against the project's testing environment and incorporated into the upstream project.
+For companies and service providers, Gesttor provides a simpler path to issue NFS-e through the national standard, organize PDF and XML documents and automate delivery to customers without relying on municipal portals for each operation.
 
-### Langroid
+The broader platform is designed as an operational system for accounting firms, bringing together client data, fiscal workflows, documents, tasks, financial operations, integrations and AI-assisted processes in a shared multi-tenant architecture.
 
-Implemented a SerpApi Google Search integration for the Langroid agent framework, including mocked tests, environment-based configuration and integration coverage.
+Core technologies include Python, Django, PostgreSQL, Redis, Celery, Docker, React and the Model Context Protocol.
 
-- [Add SerpApi Google search tool | PR #1130](https://github.com/langroid/langroid/pull/1130)
-
-The implementation was carried forward by the maintainer and merged in [PR #1133](https://github.com/langroid/langroid/pull/1133), with the original commit authorship preserved.
-
-### Querido Diário | Open Knowledge Brasil
-
-Working on the Porto Alegre official gazette scraper, combining the historical PROCEMPA archive with the current DOPA API and expanding coverage back to 1995.
-
-- [Fix Porto Alegre gazette spider | PR #1469](https://github.com/okfn-brasil/querido-diario/pull/1469)
-
-The contribution includes defensive API parsing, historical data collection, automated regression tests and smoke testing against the live source.
-
-## Featured project
+The product is currently in controlled rollout. The main source repository remains private because it contains proprietary business logic and active production integrations.
 
 ### [Querido Diário MCP Server](https://github.com/lucaspmgomess/querido-diario-mcp-server)
 
@@ -56,17 +43,24 @@ An open-source, local-first MCP server that gives AI agents structured, read-onl
 - Automated tests, type checking and CI
 - No account, API key, telemetry or proprietary backend required
 
-## Currently building
+## Open-source contributions
 
-### Gesttor Contábil
+### Open Library | Internet Archive
 
-A production-oriented, multi-tenant ERP and automation platform for accounting firms.
+Contributed to the migration of blocking lending and availability logic from Templetor templates into Python request handlers, improving separation of concerns and supporting the project's FastAPI migration.
 
-The platform brings together client management, workflows, financial operations, Brazilian electronic service invoices, document handling and AI-assisted operations.
+- [FastAPI: Move book lending preparation into Python | PR #13495](https://github.com/internetarchive/openlibrary/pull/13495)
+- [Hoist list availability lookups into Python handler | PR #13465](https://github.com/internetarchive/openlibrary/pull/13465)
 
-Core technologies include Python, Django, PostgreSQL, Redis, Celery, Docker, React and the Model Context Protocol.
+Both changes were reviewed, validated and merged into the upstream project.
 
-The main source repository is currently private because it contains proprietary business logic and active production integrations.
+Additional merged contributions include cleanup of unused template globals and i18n template globals.
+
+### Langroid
+
+Implemented the original SerpApi Google Search integration for the Langroid agent framework, including mocked tests, environment-based configuration, documentation and integration coverage.
+
+The implementation was carried forward by the maintainer and merged in [PR #1133](https://github.com/langroid/langroid/pull/1133), with the original commit authorship preserved.
 
 ## Focus
 
