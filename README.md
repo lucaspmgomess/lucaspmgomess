@@ -62,6 +62,16 @@ Implemented the original SerpApi Google Search integration for the Langroid agen
 
 The implementation was carried forward by the maintainer and merged in [PR #1133](https://github.com/langroid/langroid/pull/1133), with the original commit authorship preserved.
 
+### Querido Diário | Open Knowledge Brasil
+
+Reworked the Porto Alegre official gazette scraper after the municipality changed its publishing infrastructure, restoring current collection and extending historical coverage back to March 1995.
+
+The implementation combines two independent data sources into a continuous collection pipeline: the historical PROCEMPA AtoM archive for editions from 1995 to 2011, and the current DOPA API for newer publications. It includes pagination and defensive parsing for historical records, date-range filtering, handling of extra editions, Executive and Legislative metadata mapping, download URL normalization and automated regression coverage for the transition between both sources.
+
+A full validation run collected 15,215 publications and 15,215 files from March 1995 through August 2026 without exhausted retries or discarded items. Additional targeted collections were used to validate historical years, the 2011 source transition and recent publications, with automated tests and CI also passing.
+
+- [Fix Porto Alegre gazette spider | PR #1469, currently in review](https://github.com/okfn-brasil/querido-diario/pull/1469)
+
 ## Focus
 
 - Backend architecture and multi-tenant systems
