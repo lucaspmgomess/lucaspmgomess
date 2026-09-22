@@ -45,24 +45,22 @@ The product is currently in controlled rollout at [gesttorcontabil.com.br](https
 
 A production-oriented FastAPI service that turns Brazil's PGMEI web workflow into a structured job API for consulting MEI tax periods and generating DAS documents.
 
-The technically unusual part is the browser architecture. Instead of controlling Chrome through Playwright or CDP, the system runs FastAPI and a real Chromium session in the same container and uses a Manifest V3 browser extension as the automation layer. The extension and API communicate through an authenticated HTTP bridge.
-
-This separation gives each layer a clear responsibility: FastAPI owns jobs and queue state, the extension owns browser state and page interaction, and the container runtime owns the Chromium process.
+The service combines a real Chromium session, a Manifest V3 browser extension and a FastAPI backend inside a controlled containerized environment. Browser interaction is isolated from job orchestration through an authenticated HTTP bridge, keeping the automation layer separate from the API and queue logic.
 
 Key engineering areas include:
 
-- Chromium automation through a browser extension rather than an attached remote-debugging session
-- Canonical-tab reconciliation and leader election resilient to Manifest V3 service-worker restarts
-- Persistent FIFO job queue with restart-aware recovery semantics
-- Explicit distinction between extension liveness and real job progress
-- Recovery limits so an unresponsive browser job cannot block the entire queue indefinitely
-- Reliable PDF reconciliation even when Chrome download events are missed during service-worker idle cycles
-- Structured operational events, stable error codes and health endpoints
-- Prometheus metrics for workers, queue depth, job duration, failures, CAPTCHA waits and browser health
-- A separate Prometheus and Grafana observability stack with a provisioned PGMEI Operations dashboard
-- Automated Python tests for the API, queue and bridge plus JavaScript tests for extension coordination
+- Browser automation using Chromium and a Manifest V3 extension
+- Authenticated coordination between the browser layer and FastAPI
+- Persistent job queue and restart-aware recovery
+- Browser lifecycle and session coordination
+- Reliable document download and reconciliation
+- Structured health checks, operational events and stable error states
+- Prometheus metrics for queue, jobs, worker health and browser operations
+- A separate Prometheus and Grafana observability stack with a provisioned operations dashboard
+- Automated Python tests for the API and job orchestration
+- Automated JavaScript tests for browser-extension coordination
 
-The service is also designed to be consumed by other applications and AI agents, exposing structured job state instead of requiring callers to understand the underlying browser workflow.
+The service is designed to be consumed by other applications and AI agents through structured job state, without requiring callers to understand the underlying browser workflow.
 
 ### [ZapMEI](https://zapmei.com.br)
 
