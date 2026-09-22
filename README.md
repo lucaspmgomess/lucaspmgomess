@@ -9,6 +9,7 @@ AI integrations, accounting and public data.
 
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-111827?style=flat-square)](https://modelcontextprotocol.io/)
@@ -21,22 +22,67 @@ AI integrations, accounting and public data.
 
 A multi-tenant ERP and automation platform for accounting firms, designed around real Brazilian accounting and tax workflows.
 
-Gesttor centralizes client portfolios, fiscal operations, NFS-e issuance, digital certificates, documents, tasks, financial workflows and AI-assisted operations in a single system. The product is being developed from production use cases rather than as a generic administrative dashboard.
+Gesttor centralizes client portfolios, fiscal operations, NFS-e issuance, digital certificates, documents, tasks, financial workflows and AI-assisted operations in a single system. The platform is developed from production use cases, with particular attention to data isolation, reliability and regulated workflows.
 
-From an engineering perspective, the platform is structured as a monorepo with a Django API, a dedicated web backoffice and an independent client portal. PostgreSQL provides the transactional core, while Celery and Redis handle asynchronous workloads and operational automation.
+From an engineering perspective, Gesttor is structured as a monorepo with a Django API, a dedicated web backoffice and an independent client portal. PostgreSQL provides the transactional core, while Celery and Redis support asynchronous workloads, scheduled routines and operational automation.
 
 Key engineering areas include:
 
 - Multi-tenant data isolation and permission-aware modules
 - Brazilian NFS-e workflows, including the national service invoice standard
-- Background processing for operational and fiscal routines
+- Background processing with explicit reliability and retry semantics
 - Separate staff and client-facing applications sharing the same backend domain
-- Digital certificate, document and external service integrations
+- Digital certificates, document storage and external service integrations
 - AI and Model Context Protocol integrations for assisted operations
-- CI checks for code quality, architectural boundaries and migration safety
+- Cloud object storage for public and private media
+- Sentry error monitoring and performance tracing with sensitive-data filtering
+- CI checks for linting, architectural boundaries, migration safety and module contracts
 - Expanded automated testing for higher-risk fiscal code paths
 
 The product is currently in controlled rollout at [gesttorcontabil.com.br](https://gesttorcontabil.com.br). The main source repository remains private because it contains proprietary business logic and active production integrations.
+
+### PGMEI Automation API
+
+A production-oriented FastAPI service that turns Brazil's PGMEI web workflow into a structured job API for consulting MEI tax periods and generating DAS documents.
+
+The technically unusual part is the browser architecture. Instead of controlling Chrome through Playwright or CDP, the system runs FastAPI and a real Chromium session in the same container and uses a Manifest V3 browser extension as the automation layer. The extension and API communicate through an authenticated HTTP bridge.
+
+This separation gives each layer a clear responsibility: FastAPI owns jobs and queue state, the extension owns browser state and page interaction, and the container runtime owns the Chromium process.
+
+Key engineering areas include:
+
+- Chromium automation through a browser extension rather than an attached remote-debugging session
+- Canonical-tab reconciliation and leader election resilient to Manifest V3 service-worker restarts
+- Persistent FIFO job queue with restart-aware recovery semantics
+- Explicit distinction between extension liveness and real job progress
+- Recovery limits so an unresponsive browser job cannot block the entire queue indefinitely
+- Reliable PDF reconciliation even when Chrome download events are missed during service-worker idle cycles
+- Structured operational events, stable error codes and health endpoints
+- Prometheus metrics for workers, queue depth, job duration, failures, CAPTCHA waits and browser health
+- A separate Prometheus and Grafana observability stack with a provisioned PGMEI Operations dashboard
+- Automated Python tests for the API, queue and bridge plus JavaScript tests for extension coordination
+
+The service is also designed to be consumed by other applications and AI agents, exposing structured job state instead of requiring callers to understand the underlying browser workflow.
+
+### [ZapMEI](https://zapmei.com.br)
+
+A product layer built for Brazilian microentrepreneurs, using the PGMEI automation infrastructure to turn a complex government workflow into a simpler self-service experience.
+
+ZapMEI combines a public acquisition site with a dedicated MEI consultation experience. Users can arrive through direct or campaign links, identify their CNPJ, consult available DAS periods and continue the delivery flow without interacting directly with the PGMEI portal.
+
+The public application is built with Astro, TypeScript and Tailwind CSS and is deployed as a static frontend backed by the consultation API.
+
+Key product and engineering areas include:
+
+- Dedicated deep-linkable MEI consultation pages instead of a modal-only workflow
+- Asynchronous API polling with explicit loading, ready, error and expiration states
+- Privacy-aware URLs and analytics, avoiding CNPJ and document data in tracking events
+- Responsive flows validated with Playwright across desktop and small mobile viewports
+- Technical SEO, sitemap generation and dozens of intent-oriented acquisition pages
+- First-touch attribution and UTM preservation across the consultation funnel
+- Dockerized static delivery with build-time validation for public API configuration
+
+The source repository is private while the public product evolves at [zapmei.com.br](https://zapmei.com.br).
 
 ### [Querido Diário MCP Server](https://github.com/lucaspmgomess/querido-diario-mcp-server)
 
@@ -82,6 +128,7 @@ A full validation run collected 15,215 publications and 15,215 files from March 
 ## Focus
 
 - Backend architecture and multi-tenant systems
+- Browser automation and resilient job processing
 - AI agents and MCP integrations
 - Public APIs and civic technology
 - Reliable automation for regulated workflows
