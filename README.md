@@ -2,7 +2,7 @@
 
 # Lucas Gomes
 
-### Backend & AI Systems Engineer
+### Backend Engineer | Python, Distributed Systems & AI Integrations
 
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com/)
@@ -11,155 +11,66 @@
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-111827?style=flat-square)](https://modelcontextprotocol.io/)
 
-I design and operate backend platforms, automation infrastructure and AI-enabled systems for operationally complex environments.
-
-`BACKEND SYSTEMS → INTEGRATIONS → AUTOMATION → AI → PRODUCTION`
+I build Python backend systems, resilient integrations and AI-enabled tools for real operational workflows. Based in Porto Alegre, Brazil.
 
 </div>
 
-## Engineering profile
+## Selected work
 
-My work sits at the intersection of backend architecture, workflow automation and AI systems.
+- **[Open Library](https://github.com/internetarchive/openlibrary/pulls?q=is%3Apr+author%3Alucaspmgomess+is%3Amerged)**: Three merged pull requests moving blocking application work out of templates, with regression coverage and behavior preservation.
+- **[Langroid](https://github.com/langroid/langroid/pull/1133)**: SerpApi Google Search integration, with mocked tests, configuration and documentation.
+- **[Querido Diário](https://github.com/okfn-brasil/querido-diario/pull/1469)**: Connected the Porto Alegre historical archive to the current gazette API, covering publications from 1995 onward.
+- **[Querido Diário MCP Server](https://github.com/lucaspmgomess/querido-diario-mcp-server)**: Published MCP server with typed, read-only tools for Brazilian municipal gazette search.
 
-I focus on software that has to interact with real operational constraints: multi-tenant data, asynchronous processing, government and third-party services, browser-dependent workflows, human operations and AI agents.
+## Systems I build
 
-Rather than treating integrations as glue code, I design them as production systems with explicit boundaries, failure handling, observability and recovery paths.
+### Gesttor Contábil
 
-## Current focus
+Multi-tenant accounting ERP used for client, fiscal and document workflows.
 
-**Backend architecture**  
-Multi-tenant applications, API design, domain modeling and data-intensive systems with Python, Django, FastAPI and PostgreSQL.
+**Stack:** Django, PostgreSQL, Celery, Redis, RabbitMQ, React and Docker.
 
-**Distributed workflows**  
-Asynchronous execution, queues, scheduling and resilient job orchestration with Celery, Redis and RabbitMQ.
+My work includes tenant isolation, permission-aware modules, asynchronous processing, fiscal integrations, MCP interfaces, observability and regression coverage. The production repository is private, so the public profile describes the system without exposing business logic or customer data.
 
-**AI systems**  
-Tool-enabled agents, Model Context Protocol, structured execution and AI integrations connected to real operational systems.
+### PGMEI automation
 
-**Automation infrastructure**  
-Turning browser-dependent and legacy workflows into API-driven services with explicit state, retries, timeouts and recovery.
+A FastAPI service that coordinates browser-based workflows for Brazil's PGMEI system. The design separates API consumers from browser state and treats automation as a recoverable job workflow.
 
-**Production engineering**  
-Containerized deployment, testing, metrics, health checks and operational visibility with Docker, Prometheus, Grafana and Sentry.
+**Stack:** FastAPI, Chromium, browser extension, PostgreSQL, Prometheus, Grafana and Docker.
 
-## Selected engineering work
+The public profile summarizes the architecture and engineering concerns. The service repository is private; I can discuss design decisions and demonstrate sanitized examples without exposing credentials, customer information or production configuration.
 
-### [Gesttor Contábil](https://gesttorcontabil.com.br)
+### ZapMEI
 
-Multi-tenant ERP and automation platform for accounting firms, designed around real accounting, tax and document workflows.
+Customer-facing product built around MEI consultation and guide workflows.
 
-**Architecture:** Django · PostgreSQL · Celery · Redis · RabbitMQ · React · Docker
+**Stack:** Astro, TypeScript, Tailwind CSS, Playwright and API integrations.
 
-Engineering responsibilities include:
+Work includes deep-linked flows, asynchronous UI states, privacy-aware URLs, technical SEO and browser-based validation.
 
-- tenant-aware backend architecture and data isolation;
-- permission-aware modules and separate staff/client application surfaces;
-- asynchronous fiscal, document and scheduled processing;
-- NFS-e, digital certificate and external-service integrations;
-- AI and MCP interfaces for assisted operational workflows;
-- observability, CI gates and automated regression coverage.
+### Querido Diário MCP Server
 
-The main repository is private because it contains proprietary business logic and active production integrations.
+A local-first MCP server for searching Brazilian municipal official gazettes using the public Querido Diário API.
 
-### PGMEI Automation API
+**Status:** Beta. Published on [PyPI](https://pypi.org/project/querido-diario-mcp-server/) and the [MCP Registry](https://registry.modelcontextprotocol.io/?q=io.github.lucaspmgomess%2Fquerido-diario-mcp-server).
 
-Production-oriented automation service that exposes Brazil's PGMEI browser workflow through a structured FastAPI job interface.
+Install and launch with Python 3.12+ and uv:
 
-**Architecture:** FastAPI · Chromium · Manifest V3 · PostgreSQL · Prometheus · Grafana · Docker
+```bash
+uvx querido-diario-mcp-server
+```
 
-The system isolates browser state from API consumers and treats browser automation as a recoverable execution layer rather than an inline script.
+The server exposes three read-only tools: municipality lookup, municipality details and gazette search. It makes fixed HTTPS requests to the public API and does not accept arbitrary URLs.
 
-Key engineering concerns include:
+The repository documents CI checks for Ruff, formatting, Pyright and pytest with coverage. Tests mock the HTTP boundary and cover successful responses, validation, malformed data, upstream errors, timeouts and MCP tool outputs. See the [README](https://github.com/lucaspmgomess/querido-diario-mcp-server#readme) for client configuration, development commands and current scope.
 
-- persistent job state and restart-aware recovery;
-- authenticated communication between browser automation and API orchestration;
-- worker and browser health monitoring;
-- stale-session detection and recovery;
-- timeout and failure-state handling;
-- reliable document download and reconciliation;
-- Prometheus metrics and operational dashboards;
-- automated Python and JavaScript test suites.
+## Technical focus
 
-### [ZapMEI](https://zapmei.com.br)
-
-Customer-facing product layer built over the PGMEI automation infrastructure.
-
-**Architecture:** Astro · TypeScript · Tailwind CSS · Playwright · API integrations
-
-The product connects acquisition, consultation flows and backend automation while preserving explicit application states and operational boundaries.
-
-Engineering work includes deep-linkable workflows, asynchronous API states, privacy-aware URLs, technical SEO, attribution and automated browser validation.
-
-### [Querido Diário MCP Server](https://github.com/lucaspmgomess/querido-diario-mcp-server)
-
-Open-source MCP server that gives AI agents structured, read-only access to Brazilian municipal official-gazette data through the Querido Diário public API.
-
-[PyPI](https://pypi.org/project/querido-diario-mcp-server/) · [MCP Registry](https://registry.modelcontextprotocol.io/?q=io.github.lucaspmgomess%2Fquerido-diario-mcp-server) · [Source](https://github.com/lucaspmgomess/querido-diario-mcp-server)
-
-- async HTTP client with typed Pydantic models;
-- structured MCP tool outputs and strict validation;
-- read-only, SSRF-conscious execution model;
-- automated tests and static type checking;
-- no proprietary backend or account dependency.
-
-## Open-source engineering
-
-I contribute primarily to backend infrastructure, integrations and maintainability improvements in established open-source projects.
-
-### Internet Archive / Open Library
-
-Contributing to the migration of blocking application logic out of Templetor templates and into Python request handlers.
-
-- **[PR #13495](https://github.com/internetarchive/openlibrary/pull/13495)** — moved lending and availability preparation for work, edition and search pages into Python with regression coverage and manual QA.
-- **[PR #13465](https://github.com/internetarchive/openlibrary/pull/13465)** — removed blocking Solr and availability I/O from list templates while preserving routing, pagination and behavior.
-- **[PR #13434](https://github.com/internetarchive/openlibrary/pull/13434)** — reduced legacy template-global exposure as part of rendering-layer cleanup.
-
-All three were merged upstream.
-
-### Langroid
-
-Implemented the original SerpApi Google Search integration for the Langroid agent framework in **[PR #1130](https://github.com/langroid/langroid/pull/1130)** with mocked tests, environment-based configuration, documentation and integration coverage.
-
-The implementation was carried forward and merged upstream in **[PR #1133](https://github.com/langroid/langroid/pull/1133)** with the original commit authorship preserved.
-
-### Querido Diário / Open Knowledge Brasil
-
-Reworked the Porto Alegre official-gazette ingestion pipeline after the municipality changed publishing infrastructure.
-
-**[PR #1469](https://github.com/okfn-brasil/querido-diario/pull/1469)** joins the historical PROCEMPA AtoM archive with the current DOPA API into a continuous collection pipeline covering March 1995 onward.
-
-The implementation includes:
-
-- two independent upstream data sources;
-- historical pagination and defensive parsing;
-- date-range filtering and extra-edition handling;
-- Executive and Legislative metadata mapping;
-- regression coverage across the source transition;
-- validation across 15,215 publications and files.
-
-## Engineering principles
-
-I care about systems that remain understandable under failure.
-
-That usually means:
-
-- explicit domain and tenancy boundaries;
-- durable state for asynchronous work;
-- idempotent and recoverable integrations;
-- observable execution instead of opaque automation;
-- controlled interfaces between AI agents and production systems;
-- tests around behavior and failure modes, not only happy paths.
-
-## Core technologies
-
-**Backend:** Python · Django · FastAPI · REST APIs · PostgreSQL  
-**Async & messaging:** Celery · Redis · RabbitMQ  
-**AI systems:** MCP · LLM agents · structured tools  
-**Automation:** Chromium · browser automation · Playwright  
-**Operations:** Docker · Prometheus · Grafana · Sentry · CI/CD
+**Backend:** Python, Django, FastAPI, REST APIs, PostgreSQL  
+**Distributed workflows:** Celery, Redis, RabbitMQ, durable jobs and recovery  
+**AI integrations:** MCP, tool-enabled agents and structured outputs  
+**Production:** Docker, CI/CD, Prometheus, Grafana, Sentry and automated tests
 
 ## Contact
 
-GitHub: [@lucaspmgomess](https://github.com/lucaspmgomess)  
-Email: [lucas.maurer@ufrgs.br](mailto:lucas.maurer@ufrgs.br)  
-Porto Alegre, Brazil
+[GitHub](https://github.com/lucaspmgomess) · [Email](mailto:lucas.maurer@ufrgs.br) · Porto Alegre, Brazil
